@@ -15,6 +15,7 @@ public class FoodView : MonoBehaviour
     private int _staminaCount;
     private int _cost;
     private Player _player;
+    private CoinWallet _coinWallet;
 
     private void OnEnable()
     {
@@ -26,9 +27,10 @@ public class FoodView : MonoBehaviour
         _buyButton.onClick.RemoveListener(OnButtonClick);
     }
 
-    public void Render(Food food, Player player)
+    public void Render(Food food, Player player, CoinWallet coinWallet)
     {
         _player = player;
+        _coinWallet = coinWallet;
 
         _staminaCount = food.StaminaRecoveryCount;
         _nameText.text = food.Name + $" adds {_staminaCount.ToString()} stamina";
@@ -39,9 +41,9 @@ public class FoodView : MonoBehaviour
 
     private void OnButtonClick()
     {
-        if (_player.Money >= _cost)
+        if (_coinWallet.Money >= _cost)
         {
-            _player.TakeMoney(_cost);
+            _coinWallet.TakeMoney(_cost);
             _player.AddStamina(_staminaCount);
         }
     }

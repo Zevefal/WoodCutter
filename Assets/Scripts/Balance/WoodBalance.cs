@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class WoodBalance : Balance
+public class WoodBalance : DisplayBalance
 {
     private void Start()
     {
-        _text.text = _player.Wood.ToString();
+        _text.text = _inventory.Wood.ToString();
     }
 
     private void OnEnable()
     {
-        _player.BalanceWoodChanged += OnBalanceChanged;  
+        _inventory.BalanceWoodChanged += OnBalanceChanged;  
     }
 
     private void OnDisable()
     {
-        _player.BalanceWoodChanged -= OnBalanceChanged;
+        _inventory.BalanceWoodChanged -= OnBalanceChanged;
     }
 }

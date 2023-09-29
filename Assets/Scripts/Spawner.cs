@@ -8,6 +8,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private List<TreeEnemy> _trees;
     [SerializeField] private Transform _spawnPosition;
     [SerializeField] private Player _player;
+    [SerializeField] private Inventory _inventory;
     [SerializeField] private TreeHPDraw _treeHPDraw;
 
     private void Awake()
@@ -26,7 +27,7 @@ public class Spawner : MonoBehaviour
     private void OnTreeDying(TreeEnemy tree)
     {
         tree.Dying -= OnTreeDying;
-        _player.AddWood(tree.Reward);
+        _inventory.AddWood(tree.Reward);
 
         InstantiateTrees();
     }
