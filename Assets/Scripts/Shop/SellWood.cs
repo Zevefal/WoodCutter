@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class SellWood : MonoBehaviour
 {
-    [SerializeField] private Player _player;
+    [SerializeField] private Inventory _inventory;
+    [SerializeField] private CoinWallet _coinWallet;
 
     public void Sell()
     {
-        _player.AddMoney(_player.Wood);
-        _player.TakeWood();
+        _coinWallet.AddMoney(_inventory.Wood);
+        _inventory.TakeWood();
     }
 }

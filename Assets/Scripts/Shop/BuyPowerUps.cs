@@ -16,6 +16,7 @@ public class BuyPowerUps : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private TMP_Text _powerUpButtonNameText;
     [SerializeField] private TMP_Text _costText;
+    [SerializeField] private CoinWallet _CoinWallet;
 
     private int _powerCount = 1;
     private int _currentCost;
@@ -32,11 +33,11 @@ public class BuyPowerUps : MonoBehaviour
     {
         _powerCount = PlayerPrefs.GetInt(_name);
 
-        if (_powerCount < _maxPowerCount && _player.Money >= _currentCost)
+        if (_powerCount < _maxPowerCount && _CoinWallet.Money >= _currentCost)
         {
             PlayerPrefs.SetInt(_name, _powerCount + _addPowerCount);
             _player.PowerUp(_name, _addPowerCount);
-            _player.TakeMoney(_currentCost);
+            _CoinWallet.TakeMoney(_currentCost);
             SetCost();
         }
     }

@@ -8,6 +8,8 @@ public class SaveSystem : MonoBehaviour
     private const string PathName = "/save.dat";
 
     [SerializeField] private Player _player;
+    [SerializeField] private CoinWallet _coinWallet;
+    [SerializeField] private Inventory _inventory;
 
     private void OnEnable()
     {
@@ -26,7 +28,7 @@ public class SaveSystem : MonoBehaviour
         FileStream file = File.Create(Application.persistentDataPath + PathName);
         SaveData data = new SaveData();
 
-        data.SaveParametrs(_player.Wood,_player.Money,_player.Stamina,_player.MaxStamina,_player.Damage,DateTime.UtcNow);
+        data.SaveParametrs(_inventory.Wood,_coinWallet.Money,_player.Stamina,_player.MaxStamina,_player.Damage,DateTime.UtcNow);
         formatter.Serialize(file, data);
         file.Close();
     }
@@ -46,7 +48,9 @@ public class SaveSystem : MonoBehaviour
             staminaCount += minutsPassed;
             int totalStamina = staminaCount + data.CurrentStamina;
 
-            _player.InitializePlayerParametrs(data.WoodCount, data.MoneyCount, totalStamina, data.MaxStaminaCount, data.DamageCount);
+            _player.InitializePlayerParametrs(/*data.WoodCount, data.MoneyCount, */totalStamina, data.MaxStaminaCount, data.DamageCount);
+            _coinWallet.AddMoney(data.MoneyCount);
+            _inventory.AddWood(data.WoodCount);
         }
         else
         {

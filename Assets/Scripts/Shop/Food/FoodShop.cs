@@ -6,6 +6,7 @@ public class FoodShop : MonoBehaviour
 {
     [SerializeField] private List<Food> _foods;
     [SerializeField] private Player _player;
+    [SerializeField] private CoinWallet _coinWallet;
     [SerializeField] private FoodView _template;
     [SerializeField] private GameObject _itemContainer;
 
@@ -21,6 +22,6 @@ public class FoodShop : MonoBehaviour
     {
         var view = Instantiate(_template, _itemContainer.transform);
 
-        view.Render(food, _player);
+        view.Render(food, _player, _coinWallet);
     }
 }

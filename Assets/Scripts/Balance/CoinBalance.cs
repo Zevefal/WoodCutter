@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class CoinBalance : Balance
+public class CoinBalance : DisplayBalance
 {
     private void Start()
     {
-        _text.text = _player.Money.ToString();
+        _text.text = _coinWallet.Money.ToString();
     }
 
     private void OnEnable()
     {
-        _player.BalanceCoinChanged += OnBalanceChanged;
+        _coinWallet.BalanceCoinChanged += OnBalanceChanged;
     }
 
     private void OnDisable()
     {
-        _player.BalanceCoinChanged -= OnBalanceChanged;
+        _coinWallet.BalanceCoinChanged -= OnBalanceChanged;
     }
 }
